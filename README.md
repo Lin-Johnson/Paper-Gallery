@@ -14,6 +14,8 @@ https://lin-johnson.github.io/Paper-Gallery/
 - Open a dedicated detail page for each paper
 - Jump directly to arXiv, OpenReview, GitHub, and other external pages
 
+Directions are owner-provided, with up to three directions per paper. Memory is also owner-provided and remains blank when no memory is supplied.
+
 ## GitHub Pages
 
 This is a dependency-free static HTML site. The repository includes a GitHub Actions workflow for deployment.
