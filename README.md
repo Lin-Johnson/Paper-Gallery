@@ -23,6 +23,6 @@ python3 -m http.server 8000
 
 ## GitHub Pages
 
-这是无构建依赖的静态站点。将仓库推送到 GitHub 后，在仓库设置中打开 **Settings → Pages**，选择 **Deploy from a branch**，分支选择 `main`、目录选择 `/ (root)`，保存即可。
+这是无构建依赖的静态站点。仓库已包含 GitHub Actions 发布工作流。首次使用时，在仓库设置中打开 **Settings → Pages**，将 **Source** 设为 **GitHub Actions**；之后推送到 `main` 会自动发布。
 
 自定义封面是浏览器本地数据，不会上传到 GitHub，也不会在不同设备间同步。
