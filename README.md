@@ -1,4 +1,4 @@
-# Paper Atlas
+# Paper Gallery
 
 A static personal research literature gallery organized around custom paper covers.
 

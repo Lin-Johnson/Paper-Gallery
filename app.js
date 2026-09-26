@@ -115,7 +115,7 @@ const PAPERS = [
 ];
 
 const FILTERS = ["All papers", "LLM", "Vision", "Generative", "NLP", "Alignment"];
-const customCovers = JSON.parse(localStorage.getItem("paper-atlas-covers") || "{}");
+const customCovers = JSON.parse(localStorage.getItem("paper-gallery-covers") || localStorage.getItem("paper-atlas-covers") || "{}");
 const state = { query: "", category: "All papers" };
 const app = document.querySelector("#app");
 const toast = document.querySelector("#toast");
@@ -143,7 +143,7 @@ function defaultCover(paper) {
   const [a, b, ink] = palettes[paper.accent] || palettes.lime;
   const label = paper.category === "Generative" ? "GENERATIVE" : paper.category.toUpperCase();
   const shortTitle = paper.title.length > 34 ? `${paper.title.slice(0, 34)}…` : paper.title;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 980"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient><pattern id="p" width="36" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><path d="M0 0v36" stroke="${ink}" stroke-opacity=".1" stroke-width="2"/></pattern></defs><rect width="800" height="980" fill="url(#g)"/><rect width="800" height="980" fill="url(#p)"/><circle cx="595" cy="300" r="220" fill="none" stroke="${ink}" stroke-opacity=".25" stroke-width="3"/><circle cx="595" cy="300" r="145" fill="none" stroke="${ink}" stroke-opacity=".3" stroke-width="19"/><path d="M360 82v680M90 760h620" stroke="${ink}" stroke-opacity=".18" stroke-width="2"/><text x="75" y="92" fill="${ink}" font-family="Arial,sans-serif" font-weight="700" font-size="26" letter-spacing="4">${label}</text><text x="75" y="820" fill="${ink}" font-family="Arial,sans-serif" font-weight="700" font-size="43">${escapeXml(shortTitle)}</text><text x="75" y="885" fill="${ink}" font-family="monospace" font-size="22">PAPER ATLAS / ${paper.year}</text></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 980"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient><pattern id="p" width="36" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><path d="M0 0v36" stroke="${ink}" stroke-opacity=".1" stroke-width="2"/></pattern></defs><rect width="800" height="980" fill="url(#g)"/><rect width="800" height="980" fill="url(#p)"/><circle cx="595" cy="300" r="220" fill="none" stroke="${ink}" stroke-opacity=".25" stroke-width="3"/><circle cx="595" cy="300" r="145" fill="none" stroke="${ink}" stroke-opacity=".3" stroke-width="19"/><path d="M360 82v680M90 760h620" stroke="${ink}" stroke-opacity=".18" stroke-width="2"/><text x="75" y="92" fill="${ink}" font-family="Arial,sans-serif" font-weight="700" font-size="26" letter-spacing="4">${label}</text><text x="75" y="820" fill="${ink}" font-family="Arial,sans-serif" font-weight="700" font-size="43">${escapeXml(shortTitle)}</text><text x="75" y="885" fill="${ink}" font-family="monospace" font-size="22">PAPER GALLERY / ${paper.year}</text></svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
@@ -152,7 +152,7 @@ function paperById(id) { return PAPERS.find((paper) => paper.id === id); }
 function showToast(message) { toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600); }
 
 function header() {
-  return `<header class="topbar"><a class="brand" href="#/" aria-label="回到论文图谱首页"><span class="brand-mark"></span><span class="brand-name">PAPER <span>ATLAS</span></span></a><div class="topbar-meta"><span>personal paper library</span><b>local covers</b></div></header>`;
+  return `<header class="topbar"><a class="brand" href="#/" aria-label="Back to Paper Gallery home"><span class="brand-mark"></span><span class="brand-name">PAPER <span>GALLERY</span></span></a><div class="topbar-meta"><span>personal paper library</span><b>local covers</b></div></header>`;
 }
 
 function card(paper, index) {
@@ -166,11 +166,11 @@ function home() {
     const matchesQuery = !q || [paper.title, paper.authors, paper.category, paper.venue].join(" ").toLowerCase().includes(q);
     return matchesCategory && matchesQuery;
   });
-  return `${header()}<main class="main"><section class="view-header"><div><p class="eyebrow">01 / library</p><h1>My Paper Atlas</h1><p class="lede">Browse research papers by cover, then use the title, author, or research area to find what you need.</p></div><div class="count-chip"><strong>${String(PAPERS.length).padStart(2, "0")}</strong><span>papers<br />in atlas</span></div></section><section class="toolbar" aria-label="Paper filters"><label class="search-wrap"><span class="sr-only">Search papers</span>${icon("search", 17)}<input class="search" type="search" value="${escapeXml(state.query)}" placeholder="Search by title, author, or area…" /></label><div class="filters">${FILTERS.map((filter) => `<button class="filter-btn ${state.category === filter ? "active" : ""}" data-filter="${filter}">${filter}</button>`).join("")}</div></section><section class="paper-grid" aria-live="polite">${filtered.length ? filtered.map(card).join("") : `<div class="empty-state"><p>No papers match your search.</p><button class="filter-btn active" data-clear>Clear filters</button></div>`}</section></main>`;
+  return `${header()}<main class="main"><section class="view-header"><div><p class="eyebrow">01 / library</p><h1>Paper Gallery</h1><p class="lede">Browse research papers by cover, then use the title, author, or research area to find what you need.</p></div><div class="count-chip"><strong>${String(PAPERS.length).padStart(2, "0")}</strong><span>papers<br />in gallery</span></div></section><section class="toolbar" aria-label="Paper filters"><label class="search-wrap"><span class="sr-only">Search papers</span>${icon("search", 17)}<input class="search" type="search" value="${escapeXml(state.query)}" placeholder="Search by title, author, or area…" /></label><div class="filters">${FILTERS.map((filter) => `<button class="filter-btn ${state.category === filter ? "active" : ""}" data-filter="${filter}">${filter}</button>`).join("")}</div></section><section class="paper-grid" aria-live="polite">${filtered.length ? filtered.map(card).join("") : `<div class="empty-state"><p>No papers match your search.</p><button class="filter-btn active" data-clear>Clear filters</button></div>`}</section></main>`;
 }
 
 function detail(paper) {
-  if (!paper) return `${header()}<main class="main not-found"><p class="eyebrow">404 / not in atlas</p><h1>这篇论文还没有被收录。</h1><a class="back-link" href="#/">${icon("back")} 返回论文图谱</a></main>`;
+  if (!paper) return `${header()}<main class="main not-found"><p class="eyebrow">404 / not in gallery</p><h1>This paper is not in the gallery.</h1><a class="back-link" href="#/">${icon("back")} Back to Paper Gallery</a></main>`;
   return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} 返回全部论文</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="《${escapeXml(paper.title)}》封面" /><span class="paper-index">${paper.category} / ${paper.year}</span></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p><p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${paper.category}</strong></div><div class="meta-box"><span>Year</span><strong>${paper.year}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.note)}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row"><a class="external-link" href="${paper.arxiv}" target="_blank" rel="noreferrer">打开论文页面 ${icon("external", 15)}</a>${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
 }
 
@@ -185,7 +185,7 @@ function render() {
 function uploadCover(id, file) {
   if (!file || !file.type.startsWith("image/")) return;
   const reader = new FileReader();
-  reader.onload = () => { customCovers[id] = reader.result; localStorage.setItem("paper-atlas-covers", JSON.stringify(customCovers)); render(); showToast("封面已保存到当前浏览器"); };
+  reader.onload = () => { customCovers[id] = reader.result; localStorage.setItem("paper-gallery-covers", JSON.stringify(customCovers)); render(); showToast("封面已保存到当前浏览器"); };
   reader.readAsDataURL(file);
 }
 
