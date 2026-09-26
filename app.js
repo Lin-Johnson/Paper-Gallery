@@ -1,5 +1,22 @@
 const PAPERS = [
   {
+    id: "safesteer",
+    title: "SafeSteer: A Decoding-level Defense Mechanism for Multimodal Large Language Models",
+    authors: "Xinyi Zeng, Xue Yang, Jingyuan Zhang, Huanqian Yan, Xiang Chen, Kaiwen Wei, Hankun Kang, Yu Tian",
+    year: "2026",
+    published: "July 2026",
+    venue: "Findings of ACL",
+    category: "Alignment",
+    note: "Decoding-level multimodal safety defense.",
+    abstract: "SafeSteer studies how multimodal large language models distinguish harmful and harmless inputs during decoding, then uses a Decoding-Probe and a modal semantic alignment vector to steer outputs toward safety without fine-tuning.",
+    arxiv: "https://arxiv.org/abs/2605.11716",
+    publication: "https://aclanthology.org/2026.findings-acl.916/",
+    github: null,
+    openReview: null,
+    accent: "blue",
+    coverImage: "./assets/covers/safesteer-figure-3.png"
+  },
+  {
     id: "attention-is-all-you-need",
     title: "Attention Is All You Need",
     authors: "Ashish Vaswani, Noam Shazeer, Niki Parmar 等",
@@ -147,7 +164,7 @@ function defaultCover(paper) {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-function getCover(paper) { return customCovers[paper.id] || defaultCover(paper); }
+function getCover(paper) { return customCovers[paper.id] || paper.coverImage || defaultCover(paper); }
 function paperById(id) { return PAPERS.find((paper) => paper.id === id); }
 function showToast(message) { toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600); }
 
@@ -171,7 +188,7 @@ function home() {
 
 function detail(paper) {
   if (!paper) return `${header()}<main class="main not-found"><p class="eyebrow">404 / not in gallery</p><h1>This paper is not in the gallery.</h1><a class="back-link" href="#/">${icon("back")} Back to Paper Gallery</a></main>`;
-  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} 返回全部论文</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="《${escapeXml(paper.title)}》封面" /><span class="paper-index">${paper.category} / ${paper.year}</span></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p><p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${paper.category}</strong></div><div class="meta-box"><span>Year</span><strong>${paper.year}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.note)}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row"><a class="external-link" href="${paper.arxiv}" target="_blank" rel="noreferrer">打开论文页面 ${icon("external", 15)}</a>${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
+  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} 返回全部论文</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="《${escapeXml(paper.title)}》封面" /><span class="paper-index">${paper.category} / ${paper.year}</span></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p><p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${paper.category}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.note)}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row"><a class="external-link" href="${paper.arxiv}" target="_blank" rel="noreferrer">打开论文页面 ${icon("external", 15)}</a>${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">ACL Anthology ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
 }
 
 function render() {

@@ -2,6 +2,10 @@
 
 A static personal research literature gallery organized around custom paper covers.
 
+## Live Demo
+
+https://lin-johnson.github.io/Paper-Gallery/
+
 ## Features
 
 - Browse papers through a cover-first card grid
