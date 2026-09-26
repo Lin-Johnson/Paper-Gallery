@@ -58,6 +58,7 @@ h1 { margin-bottom: 13px; font-size: clamp(2.3rem, 4.8vw, 4.4rem); line-height: 
 
 .paper-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 20px; }
 .paper-card { min-width: 0; position: relative; }
+.cover-stage { position: relative; }
 .cover-button { display: block; width: 100%; padding: 0; border: 0; background: transparent; text-align: left; }
 .cover-frame { position: relative; aspect-ratio: 1 / 1.22; border-radius: 12px; overflow: hidden; background: var(--ink-soft); box-shadow: var(--shadow); transition: transform .22s ease, box-shadow .22s ease; }
 .cover-button:hover .cover-frame { transform: translateY(-5px) rotate(-.35deg); box-shadow: 0 22px 42px rgba(14,23,38,.17); }
@@ -67,7 +68,7 @@ h1 { margin-bottom: 13px; font-size: clamp(2.3rem, 4.8vw, 4.4rem); line-height: 
 .cover-overlay strong { display: block; font-size: 15px; line-height: 1.35; letter-spacing: -.035em; }
 .paper-index { position: absolute; top: 12px; left: 13px; padding: 4px 7px; border-radius: 5px; background: rgba(14,23,38,.86); color: var(--lime); font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: .06em; }
 .edit-cover { position: absolute; top: 10px; right: 10px; z-index: 2; width: 33px; height: 33px; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; background: rgba(14,23,38,.74); color: white; display: grid; place-items: center; opacity: 0; transition: opacity .18s; }
-.cover-frame:hover .edit-cover, .edit-cover:focus-visible { opacity: 1; }
+.cover-stage:hover .edit-cover, .edit-cover:focus-visible { opacity: 1; }
 .paper-card-info { padding: 13px 2px 0; }
 .paper-card-title { margin: 0 0 7px; font-size: 15px; line-height: 1.42; letter-spacing: -.025em; }
 .paper-card-meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-family: "DM Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; }

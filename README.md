@@ -13,8 +13,6 @@ https://lin-johnson.github.io/Paper-Gallery/
 - Filter papers by research area
 - Open a dedicated detail page for each paper
 - Jump directly to arXiv, OpenReview, GitHub, and other external pages
-- Upload a custom cover for any paper
-- Store custom covers locally in the current browser with `localStorage`
 
 ## GitHub Pages
 
@@ -25,5 +23,3 @@ To enable deployment for the first time:
 1. Open **Settings → Pages** in the repository.
 2. Set **Source** to **GitHub Actions**.
 3. Push changes to the `main` branch to publish updates automatically.
-
-Custom covers are stored in the current browser only. They are not uploaded to GitHub and are not synchronized across devices.

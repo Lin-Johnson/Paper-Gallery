@@ -82,7 +82,8 @@ const PAPERS = [
     category: "Generative",
     note: "文本到视频的世界模拟视角。",
     abstract: "讨论通过大规模视频训练得到的视频生成模型，并展示其在生成复杂场景、长时序动作与不同画幅视频方面的能力。",
-    arxiv: "https://openai.com/index/video-generation-models-as-world-simulators/",
+    arxiv: null,
+    paperPage: "https://openai.com/index/video-generation-models-as-world-simulators/",
     github: null,
     accent: "orange",
     cover: "cover-sora"
@@ -165,6 +166,13 @@ function defaultCover(paper) {
 }
 
 function getCover(paper) { return customCovers[paper.id] || paper.coverImage || defaultCover(paper); }
+function pdfUrl(paper) {
+  if (paper.pdf) return paper.pdf;
+  if (paper.arxiv?.includes("arxiv.org/abs/")) return paper.arxiv.replace("/abs/", "/pdf/");
+  return null;
+}
+function paperPageUrl(paper) { return paper.arxiv || paper.paperPage; }
+function paperPageLabel(paper) { return paper.arxiv ? "Open arXiv" : "Open paper page"; }
 function paperById(id) { return PAPERS.find((paper) => paper.id === id); }
 function showToast(message) { toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600); }
 
@@ -173,7 +181,8 @@ function header() {
 }
 
 function card(paper, index) {
-  return `<article class="paper-card"><button class="cover-button" data-open="${paper.id}" aria-label="打开《${escapeXml(paper.title)}》详情"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="《${escapeXml(paper.title)}》封面" /><span class="paper-index">${String(index + 1).padStart(2, "0")}</span><span class="cover-overlay"><small>${paper.category} · ${paper.year}</small><strong>${escapeXml(paper.title)}</strong></span><span class="edit-cover" role="button" tabindex="0" data-upload="${paper.id}" aria-label="为《${escapeXml(paper.title)}》更换封面">${icon("edit", 15)}</span></div></button><div class="paper-card-info"><h2 class="paper-card-title">${escapeXml(paper.title)}</h2><div class="paper-card-meta"><span>${paper.venue}</span><span class="tag">${paper.category}</span></div><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></div></article>`;
+  const pdf = pdfUrl(paper);
+  return `<article class="paper-card"><div class="cover-stage"><button class="cover-button" data-open="${paper.id}" aria-label="Open details for ${escapeXml(paper.title)}"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${String(index + 1).padStart(2, "0")}</span><span class="cover-overlay"><small>${paper.category} · ${paper.year}</small><strong>${escapeXml(paper.title)}</strong></span></div></button>${pdf ? `<a class="edit-cover pdf-link" href="${pdf}" target="_blank" rel="noreferrer" aria-label="Open PDF for ${escapeXml(paper.title)}">${icon("external", 15)}</a>` : ""}</div><div class="paper-card-info"><h2 class="paper-card-title">${escapeXml(paper.title)}</h2><div class="paper-card-meta"><span>${paper.venue}</span><span class="tag">${paper.category}</span></div></div></article>`;
 }
 
 function home() {
@@ -188,7 +197,7 @@ function home() {
 
 function detail(paper) {
   if (!paper) return `${header()}<main class="main not-found"><p class="eyebrow">404 / not in gallery</p><h1>This paper is not in the gallery.</h1><a class="back-link" href="#/">${icon("back")} Back to Paper Gallery</a></main>`;
-  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} 返回全部论文</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="《${escapeXml(paper.title)}》封面" /><span class="paper-index">${paper.category} / ${paper.year}</span></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p><p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${paper.category}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.note)}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row"><a class="external-link" href="${paper.arxiv}" target="_blank" rel="noreferrer">打开论文页面 ${icon("external", 15)}</a>${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">ACL Anthology ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
+  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} Return</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${paper.category} / ${paper.year}</span></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p><p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${paper.category}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.note)}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row">${paperPageUrl(paper) ? `<a class="external-link" href="${paperPageUrl(paper)}" target="_blank" rel="noreferrer">${paperPageLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">ACL Anthology ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
 }
 
 function render() {
@@ -207,7 +216,7 @@ function uploadCover(id, file) {
 }
 
 function bindEvents() {
-  document.querySelectorAll("[data-open]").forEach((button) => button.addEventListener("click", (event) => { if (!event.target.closest("[data-upload]")) location.hash = `#/paper/${button.dataset.open}`; }));
+  document.querySelectorAll("[data-open]").forEach((button) => button.addEventListener("click", () => { location.hash = `#/paper/${button.dataset.open}`; }));
   document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => { state.category = button.dataset.filter; render(); }));
   document.querySelector("[data-clear]")?.addEventListener("click", () => { state.category = "All papers"; state.query = ""; render(); });
   document.querySelector(".search")?.addEventListener("input", (event) => { state.query = event.target.value; render(); const search = document.querySelector(".search"); search?.focus(); search?.setSelectionRange(state.query.length, state.query.length); });
