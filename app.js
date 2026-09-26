@@ -2,7 +2,9 @@ const PAPERS = [
   {
     id: "safesteer",
     title: "SafeSteer: A Decoding-level Defense Mechanism for Multimodal Large Language Models",
-    authors: "Xinyi Zeng, Xue Yang, Jingyuan Zhang, Huanqian Yan, Xiang Chen, Kaiwen Wei, Hankun Kang, Yu Tian",
+    authors: "Xinyi Zeng¹, Xue Yang², Jingyuan Zhang³, Huanqian Yan⁴, Xiang Chen⁵, Kaiwen Wei⁶, Hankun Kang⁷, Yu Tian¹*",
+    affiliations: "¹ Tsinghua University, Beijing, China\n² Shanghai Jiao Tong University\n³ Kuaishou Technology, Beijing, China\n⁴ School of Computer Science and Technology, Beihang University\n⁵ Nanjing University of Aeronautics and Astronautics\n⁶ Chongqing University\n⁷ Wuhan University",
+    authorNote: "* Corresponding author",
     year: "2026",
     published: "July 2026",
     venue: "Findings of ACL",
@@ -17,122 +19,68 @@ const PAPERS = [
     coverImage: "./assets/covers/safesteer-figure-3.png"
   },
   {
-    id: "attention-is-all-you-need",
-    title: "Attention Is All You Need",
-    authors: "Ashish Vaswani, Noam Shazeer, Niki Parmar 等",
-    year: "2017",
-    venue: "NeurIPS",
-    directions: ["NLP"],
-    memory: "Transformer 架构的起点。",
-    abstract: "提出 Transformer：一种完全基于注意力机制、摒弃循环与卷积结构的序列转换模型。它在机器翻译任务上实现了更好的质量，同时显著提升了并行训练效率。",
-    arxiv: "https://arxiv.org/abs/1706.03762",
-    github: "https://github.com/tensorflow/tensor2tensor",
-    accent: "lime",
-    cover: "cover-transformer"
-  },
-  {
-    id: "lora",
-    title: "LoRA: Low-Rank Adaptation of Large Language Models",
-    authors: "Edward J. Hu, Yelong Shen, Phillip Wallis 等",
-    year: "2021",
-    venue: "ICLR",
-    directions: ["LLM"],
-    memory: "参数高效微调的常用基线。",
-    abstract: "提出低秩适配方法 LoRA，在冻结预训练权重的同时注入可训练的低秩矩阵，从而大幅减少下游任务微调所需的参数量与显存。",
-    arxiv: "https://arxiv.org/abs/2106.09685",
-    openReview: "https://openreview.net/forum?id=nZeVKeeFYf9",
-    github: "https://github.com/microsoft/LoRA",
-    accent: "coral",
-    cover: "cover-lora"
-  },
-  {
-    id: "segment-anything",
-    title: "Segment Anything",
-    authors: "Alexander Kirillov, Eric Mintun, Nikhila Ravi 等",
-    year: "2023",
-    venue: "ICCV",
-    directions: ["Vision"],
-    memory: "通用视觉分割模型。",
-    abstract: "介绍 Segment Anything Model（SAM）和 SA-1B 数据集，探索一种能够通过点、框或掩码提示对图像中任意对象进行分割的基础模型。",
-    arxiv: "https://arxiv.org/abs/2304.02643",
-    github: "https://github.com/facebookresearch/segment-anything",
-    accent: "blue",
-    cover: "cover-sam"
-  },
-  {
-    id: "denoising-diffusion",
-    title: "Denoising Diffusion Probabilistic Models",
-    authors: "Jonathan Ho, Ajay Jain, Pieter Abbeel",
-    year: "2020",
-    venue: "NeurIPS",
-    directions: ["Generative"],
-    memory: "扩散模型的关键基石。",
-    abstract: "提出一种通过逐步去噪来生成样本的概率模型，并展示了扩散模型在图像生成上具有与 GAN 相当的高质量表现。",
-    arxiv: "https://arxiv.org/abs/2006.11239",
-    github: "https://github.com/hojonathanho/diffusion",
+    id: "steering-away-from-harm",
+    title: "Steering Away from Harm: An Adaptive Approach to Defending Vision Language Model Against Jailbreaks",
+    authors: "Han Wang¹, Gang Wang¹, Huan Zhang¹",
+    affiliations: "¹ University of Illinois Urbana-Champaign",
+    year: "2025",
+    published: "June 2025",
+    venue: "CVPR",
+    directions: ["VLM", "Safety", "Steering"],
+    memory: "",
+    abstract: "ASTRA adaptively steers vision-language models away from harmful feature directions to resist jailbreaks. It constructs transferable steering vectors through image attribution and applies adaptive activation steering at inference time, reducing harmful outputs while preserving benign performance.",
+    arxiv: "https://arxiv.org/abs/2411.16721",
+    publication: "https://openaccess.thecvf.com/content/CVPR2025/html/Wang_Steering_Away_from_Harm_An_Adaptive_Approach_to_Defending_Vision_CVPR_2025_paper.html",
+    github: "https://github.com/ASTRAL-Group/ASTRA",
+    openReview: null,
     accent: "purple",
-    cover: "cover-diffusion"
+    coverImage: "./assets/covers/astra-figure-1.png"
   },
   {
-    id: "sora",
-    title: "Video generation models as world simulators",
-    authors: "OpenAI",
-    year: "2024",
-    venue: "Technical Report",
-    directions: ["Generative"],
-    memory: "文本到视频的世界模拟视角。",
-    abstract: "讨论通过大规模视频训练得到的视频生成模型，并展示其在生成复杂场景、长时序动作与不同画幅视频方面的能力。",
+    id: "attack-as-defense",
+    title: "Attack as Defense: Safeguarding Large Vision-Language Models from Jailbreaking by Adversarial Attacks",
+    authors: "Chongxin Li, Hanzhang Wang*, Yuchun Fang",
+    affiliations: "School of Computer Engineering and Science, Shanghai University",
+    authorNote: "* Corresponding author",
+    year: "2025",
+    published: "November 2025",
+    venue: "Findings of EMNLP",
+    directions: ["VLM", "Safety"],
+    memory: "",
+    abstract: "Attack as Defense (AsD) proactively defends vision-language models at the cross-modal level by embedding protective perturbations in vision and reinforcing them with system-level prompts, mitigating typographic and adversarial jailbreak attacks.",
     arxiv: null,
-    paperPage: "https://openai.com/index/video-generation-models-as-world-simulators/",
-    github: null,
-    accent: "orange",
-    cover: "cover-sora"
-  },
-  {
-    id: "in-context-learning",
-    title: "Language Models are Few-Shot Learners",
-    authors: "Tom B. Brown, Benjamin Mann, Nick Ryder 等",
-    year: "2020",
-    venue: "NeurIPS",
-    directions: ["LLM"],
-    memory: "大语言模型 few-shot 能力的代表工作。",
-    abstract: "研究 GPT-3 这类大规模自回归语言模型在不更新梯度的情况下，通过上下文示例完成下游任务的能力，并系统分析模型规模与任务表现之间的关系。",
-    arxiv: "https://arxiv.org/abs/2005.14165",
-    github: null,
+    paperPage: "https://aclanthology.org/2025.findings-emnlp.1095/",
+    pdf: "https://aclanthology.org/2025.findings-emnlp.1095.pdf",
+    publication: null,
+    github: "https://github.com/AngelAlita/AsD",
+    openReview: null,
     accent: "teal",
-    cover: "cover-gpt"
+    coverImage: "./assets/covers/asd-figure-2.png"
   },
   {
-    id: "clip",
-    title: "Learning Transferable Visual Models From Natural Language Supervision",
-    authors: "Alec Radford, Jong Wook Kim, Chris Hallacy 等",
-    year: "2021",
-    venue: "ICML",
-    directions: ["Vision"],
-    memory: "视觉-语言预训练的标志性工作。",
-    abstract: "从互联网上收集的图文对中学习图像与文本的联合表示，展示了自然语言监督如何帮助视觉模型实现零样本迁移。",
-    arxiv: "https://arxiv.org/abs/2103.00020",
-    github: "https://github.com/openai/CLIP",
-    accent: "pink",
-    cover: "cover-clip"
-  },
-  {
-    id: "rlhf",
-    title: "Training language models to follow instructions with human feedback",
-    authors: "Long Ouyang, Jeffrey Wu, Xu Jiang 等",
-    year: "2022",
-    venue: "NeurIPS",
-    directions: ["Alignment"],
-    memory: "InstructGPT 的训练方法。",
-    abstract: "提出通过监督微调、奖励模型和近端策略优化，让语言模型更好地遵循用户意图；结果显示较小的对齐模型也可以获得更受偏好的输出。",
-    arxiv: "https://arxiv.org/abs/2203.02155",
-    github: null,
-    accent: "red",
-    cover: "cover-rlhf"
+    id: "safety-potential-pruning",
+    title: "Safety-Potential Pruning for Enhancing Safety Prompts Against VLM Jailbreaking Without Retraining",
+    authors: "Chongxin Li, Hanzhang Wang*, Lian Duan",
+    affiliations: "School of Computer Engineering and Science, Shanghai University",
+    authorNote: "* Corresponding author",
+    year: "2026",
+    published: "June 2026",
+    venue: "TACL",
+    directions: ["VLM", "Safety", "Pruning"],
+    memory: "",
+    abstract: "Safety-Potential Pruning is a one-shot pruning framework that amplifies safety-relevant activations by removing weights that are less responsive to safety prompts, strengthening VLM jailbreak defenses without additional retraining.",
+    arxiv: "https://arxiv.org/abs/2603.14219",
+    paperPage: "https://aclanthology.org/2026.tacl-1.53/",
+    pdf: "https://aclanthology.org/2026.tacl-1.53.pdf",
+    publication: null,
+    github: "https://github.com/AngelAlita/Safety-Potential-Pruning",
+    openReview: null,
+    accent: "orange",
+    coverImage: "./assets/covers/safety-potential-pruning-figure-2.png"
   }
 ];
 
-const FILTERS = ["All papers", ...new Set(PAPERS.flatMap((paper) => paper.directions || []).filter(Boolean))];
+const FILTERS = ["All papers", "VLM", "Speech", "NLP", "Vision"];
 const customCovers = JSON.parse(localStorage.getItem("paper-gallery-covers") || localStorage.getItem("paper-atlas-covers") || "{}");
 const state = { query: "", category: "All papers" };
 const app = document.querySelector("#app");
@@ -168,7 +116,7 @@ function defaultCover(paper) {
 function getCover(paper) { return customCovers[paper.id] || paper.coverImage || defaultCover(paper); }
 function directionsFor(paper) { return (paper.directions || []).slice(0, 3); }
 function directionText(paper, separator = " · ") { return directionsFor(paper).join(separator); }
-function indexText(paper) { return [directionText(paper, " / "), paper.year].filter(Boolean).join(" / "); }
+function affiliationText(paper) { return (paper.affiliations || "").split("\n").map(escapeXml).join("<br />"); }
 function pdfUrl(paper) {
   if (paper.pdf) return paper.pdf;
   if (paper.arxiv?.includes("arxiv.org/abs/")) return paper.arxiv.replace("/abs/", "/pdf/");
@@ -176,6 +124,7 @@ function pdfUrl(paper) {
 }
 function paperPageUrl(paper) { return paper.arxiv || paper.paperPage; }
 function paperPageLabel() { return "Open Paper"; }
+function publicationLabel(paper) { return paper.venue?.includes("CVPR") ? "CVPR Open Access" : "ACL Anthology"; }
 function paperById(id) { return PAPERS.find((paper) => paper.id === id); }
 function showToast(message) { toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600); }
 
@@ -185,7 +134,7 @@ function header() {
 
 function card(paper, index) {
   const pdf = pdfUrl(paper);
-  return `<article class="paper-card"><div class="cover-stage"><button class="cover-button" data-open="${paper.id}" aria-label="Open details for ${escapeXml(paper.title)}"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${String(index + 1).padStart(2, "0")}</span><span class="cover-overlay"><small>${[directionText(paper), paper.year].filter(Boolean).join(" · ")}</small><strong>${escapeXml(paper.title)}</strong></span></div></button>${pdf ? `<a class="edit-cover pdf-link" href="${pdf}" target="_blank" rel="noreferrer" aria-label="Open PDF for ${escapeXml(paper.title)}">${icon("external", 15)}</a>` : ""}</div><div class="paper-card-info"><h2 class="paper-card-title">${escapeXml(paper.title)}</h2><div class="paper-card-meta"><span>${paper.venue}</span><span class="tag">${directionText(paper)}</span></div></div></article>`;
+  return `<article class="paper-card"><div class="cover-stage"><button class="cover-button" data-open="${paper.id}" aria-label="Open details for ${escapeXml(paper.title)}"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${String(index + 1).padStart(2, "0")}</span><span class="cover-overlay"><strong>${escapeXml(paper.title)}</strong></span></div></button>${pdf ? `<a class="edit-cover pdf-link" href="${pdf}" target="_blank" rel="noreferrer" aria-label="Open PDF for ${escapeXml(paper.title)}">${icon("external", 15)}</a>` : ""}</div><div class="paper-card-info"><h2 class="paper-card-title">${escapeXml(paper.title)}</h2><div class="paper-card-meta"><span>${[paper.venue, paper.year].filter(Boolean).join(" · ")}</span><span class="tag">${directionText(paper)}</span></div></div></article>`;
 }
 
 function home() {
@@ -200,7 +149,7 @@ function home() {
 
 function detail(paper) {
   if (!paper) return `${header()}<main class="main not-found"><p class="eyebrow">404 / not in gallery</p><h1>This paper is not in the gallery.</h1><a class="back-link" href="#/">${icon("back")} Back to Paper Gallery</a></main>`;
-  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} Return</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${indexText(paper)}</span></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p><p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${directionText(paper)}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.memory || "")}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row">${paperPageUrl(paper) ? `<a class="external-link" href="${paperPageUrl(paper)}" target="_blank" rel="noreferrer">${paperPageLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">ACL Anthology ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
+  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} Return</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p>${paper.affiliations ? `<p class="detail-affiliations">${affiliationText(paper)}${paper.authorNote ? `<br /><span>${escapeXml(paper.authorNote)}</span>` : ""}</p>` : ""}<p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${directionText(paper)}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.memory || "")}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row">${paperPageUrl(paper) ? `<a class="external-link" href="${paperPageUrl(paper)}" target="_blank" rel="noreferrer">${paperPageLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">${publicationLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
 }
 
 function render() {

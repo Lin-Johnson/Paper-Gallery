@@ -71,7 +71,7 @@ h1 { margin-bottom: 13px; font-size: clamp(2.3rem, 4.8vw, 4.4rem); line-height: 
 .cover-stage:hover .edit-cover, .edit-cover:focus-visible { opacity: 1; }
 .paper-card-info { padding: 13px 2px 0; }
 .paper-card-title { margin: 0 0 7px; font-size: 15px; line-height: 1.42; letter-spacing: -.025em; }
-.paper-card-meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-family: "DM Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; }
+.paper-card-meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-family: "DM Mono", monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
 .tag { color: var(--ink-soft); }
 .empty-state { grid-column: 1 / -1; padding: 80px 20px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 14px; }
 
@@ -82,7 +82,8 @@ h1 { margin-bottom: 13px; font-size: clamp(2.3rem, 4.8vw, 4.4rem); line-height: 
 .detail-cover .cover-frame { aspect-ratio: 1 / 1.3; }
 .detail-content { max-width: 740px; }
 .detail-content h1 { font-size: clamp(2rem, 4vw, 4rem); max-width: 800px; }
-.detail-authors { color: var(--ink-soft); font-size: 15px; margin-bottom: 23px; }
+.detail-authors { color: var(--ink-soft); font-size: 15px; margin-bottom: 8px; }
+.detail-affiliations { color: var(--muted); font-size: 13px; line-height: 1.65; margin: 0 0 23px; }
 .detail-rule { height: 1px; background: var(--line); margin: 25px 0; }
 .detail-abstract { color: var(--ink-soft); font-size: 17px; line-height: 1.85; max-width: 700px; }
 .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 30px 0; }
