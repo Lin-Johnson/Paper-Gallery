@@ -172,7 +172,7 @@ function pdfUrl(paper) {
   return null;
 }
 function paperPageUrl(paper) { return paper.arxiv || paper.paperPage; }
-function paperPageLabel(paper) { return paper.arxiv ? "Open arXiv" : "Open paper page"; }
+function paperPageLabel() { return "Open Paper"; }
 function paperById(id) { return PAPERS.find((paper) => paper.id === id); }
 function showToast(message) { toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600); }
 
