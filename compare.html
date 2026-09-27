@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#171714" />
+    <title>Paper Gallery · Design comparison</title>
+    <style>
+      :root {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        color: #171714;
+        background: #e7e4da;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body { margin: 0; overflow: hidden; }
+
+      .toolbar {
+        height: 58px;
+        padding: 0 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border-top: 6px solid #171714;
+        border-bottom: 1px solid #171714;
+        background: #f0eee7;
+      }
+
+      .toolbar strong { font-size: 14px; letter-spacing: -0.01em; }
+      .toolbar span { color: #706f68; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+      .toolbar a { color: #171714; border-bottom: 1px solid #171714; font-size: 11px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: .06em; }
+      .toolbar-links { display: flex; gap: 16px; }
+
+      .comparison {
+        height: calc(100% - 58px);
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .version {
+        min-width: 0;
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: 35px minmax(0, 1fr);
+        border: 1px solid #171714;
+        border-radius: 0;
+        background: white;
+        box-shadow: 6px 6px 0 rgba(23, 23, 20, 0.16);
+      }
+
+      .version-label {
+        padding: 0 13px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #171714;
+        color: #5f5e58;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      iframe { width: 100%; height: 100%; border: 0; background: white; }
+
+      @media (max-width: 760px) {
+        body { overflow: auto; }
+        .toolbar span { display: none; }
+        .comparison { height: auto; grid-template-columns: 1fr; }
+        .version { height: 78vh; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="toolbar">
+      <div><strong>Paper Gallery</strong> <span>Design comparison</span></div>
+      <nav class="toolbar-links" aria-label="Open a design at full size">
+        <a href="./index.html" target="_blank">Open original</a>
+        <a href="./minimal.html" target="_blank">Open editorial</a>
+      </nav>
+    </header>
+    <main class="comparison">
+      <section class="version">
+        <div class="version-label"><span>Original</span><span>Before</span></div>
+        <iframe src="./index.html" title="Original Paper Gallery design"></iframe>
+      </section>
+      <section class="version">
+        <div class="version-label"><span>Editorial archive</span><span>New concept</span></div>
+        <iframe src="./minimal.html" title="Editorial Paper Gallery design"></iframe>
+      </section>
+    </main>
+  </body>
+</html>

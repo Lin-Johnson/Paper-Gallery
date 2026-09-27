@@ -4,10 +4,9 @@ const PAPERS = [
     title: "SafeSteer: A Decoding-level Defense Mechanism for Multimodal Large Language Models",
     authors: "Xinyi Zeng¹, Xue Yang², Jingyuan Zhang³, Huanqian Yan⁴, Xiang Chen⁵, Kaiwen Wei⁶, Hankun Kang⁷, Yu Tian¹*",
     affiliations: "¹ Tsinghua University, Beijing, China\n² Shanghai Jiao Tong University\n³ Kuaishou Technology, Beijing, China\n⁴ School of Computer Science and Technology, Beihang University\n⁵ Nanjing University of Aeronautics and Astronautics\n⁶ Chongqing University\n⁷ Wuhan University",
-    authorNote: "* Corresponding author",
     year: "2026",
     published: "July 2026",
-    venue: "Findings of ACL",
+    venue: "ACL · Findings",
     directions: ["VLM", "Safety", "Steering"],
     memory: "",
     abstract: "SafeSteer studies how multimodal large language models distinguish harmful and harmless inputs during decoding, then uses a Decoding-Probe and a modal semantic alignment vector to steer outputs toward safety without fine-tuning.",
@@ -26,6 +25,7 @@ const PAPERS = [
     year: "2025",
     published: "June 2025",
     venue: "CVPR",
+    presentation: "Poster",
     directions: ["VLM", "Safety", "Steering"],
     memory: "",
     abstract: "ASTRA adaptively steers vision-language models away from harmful feature directions to resist jailbreaks. It constructs transferable steering vectors through image attribution and applies adaptive activation steering at inference time, reducing harmful outputs while preserving benign performance.",
@@ -41,10 +41,9 @@ const PAPERS = [
     title: "Attack as Defense: Safeguarding Large Vision-Language Models from Jailbreaking by Adversarial Attacks",
     authors: "Chongxin Li, Hanzhang Wang*, Yuchun Fang",
     affiliations: "School of Computer Engineering and Science, Shanghai University",
-    authorNote: "* Corresponding author",
     year: "2025",
     published: "November 2025",
-    venue: "Findings of EMNLP",
+    venue: "EMNLP · Findings",
     directions: ["VLM", "Safety"],
     memory: "",
     abstract: "Attack as Defense (AsD) proactively defends vision-language models at the cross-modal level by embedding protective perturbations in vision and reinforcing them with system-level prompts, mitigating typographic and adversarial jailbreak attacks.",
@@ -62,7 +61,6 @@ const PAPERS = [
     title: "Safety-Potential Pruning for Enhancing Safety Prompts Against VLM Jailbreaking Without Retraining",
     authors: "Chongxin Li, Hanzhang Wang*, Lian Duan",
     affiliations: "School of Computer Engineering and Science, Shanghai University",
-    authorNote: "* Corresponding author",
     year: "2026",
     published: "June 2026",
     venue: "TACL",
@@ -77,6 +75,48 @@ const PAPERS = [
     openReview: null,
     accent: "orange",
     coverImage: "./assets/covers/safety-potential-pruning-figure-2.png"
+  },
+  {
+    id: "inferaligner",
+    title: "InferAligner: Inference-Time Alignment for Harmlessness through Cross-Model Guidance",
+    authors: "Pengyu Wang, Dong Zhang, Linyang Li, Chenkun Tan, Xinghao Wang, Mozhi Zhang, Ke Ren, Botian Jiang, Xipeng Qiu*",
+    affiliations: "School of Computer Science, Fudan University\nShanghai Key Laboratory of Intelligent Information Processing, Fudan University",
+    year: "2024",
+    published: "November 2024",
+    venue: "EMNLP",
+    presentation: "Poster",
+    directions: ["VLM", "Safety", "Steering"],
+    memory: "",
+    abstract: "InferAligner performs harmlessness alignment at inference time by extracting safety steering vectors from aligned models and applying them selectively to target-model activations when harmful intent is detected. The method reduces attack success rates while preserving downstream task performance, including in multimodal models such as LLaVA.",
+    arxiv: "https://arxiv.org/abs/2401.11206",
+    paperPage: "https://aclanthology.org/2024.emnlp-main.585/",
+    pdf: "https://aclanthology.org/2024.emnlp-main.585.pdf",
+    publication: "https://aclanthology.org/2024.emnlp-main.585/",
+    github: "https://github.com/Jihuai-wpy/InferAligner",
+    openReview: null,
+    accent: "pink",
+    coverImage: "./assets/covers/inferaligner-figure-2.png"
+  },
+  {
+    id: "hiddendetect",
+    title: "HiddenDetect: Detecting Jailbreak Attacks against Large Vision-Language Models via Monitoring Hidden States",
+    authors: "Yilei Jiang²,¹, Xinyan Gao¹, Tianshuo Peng¹, Yingshui Tan², Xiaoyong Zhu², Bo Zheng², Xiangyu Yue¹",
+    affiliations: "¹ MMLab, The Chinese University of Hong Kong\n² Future Lab, Alibaba Group",
+    year: "2025",
+    published: "July 2025",
+    venue: "ACL",
+    presentation: "Poster",
+    directions: ["VLM", "Safety"],
+    memory: "",
+    abstract: "HiddenDetect is a tuning-free framework that monitors safety-relevant signals in LVLM hidden states to detect jailbreak attacks. It constructs a multimodal refusal vector and measures cosine similarity at safety-aware layers, enabling efficient detection while preserving model utility.",
+    arxiv: "https://arxiv.org/abs/2502.14744",
+    paperPage: "https://aclanthology.org/2025.acl-long.724/",
+    pdf: "https://arxiv.org/pdf/2502.14744",
+    publication: "https://aclanthology.org/2025.acl-long.724/",
+    github: "https://github.com/leigest519/HiddenDetect",
+    openReview: null,
+    accent: "red",
+    coverImage: "./assets/covers/hiddendetect-figure-4.png"
   }
 ];
 
@@ -116,7 +156,19 @@ function defaultCover(paper) {
 function getCover(paper) { return customCovers[paper.id] || paper.coverImage || defaultCover(paper); }
 function directionsFor(paper) { return (paper.directions || []).slice(0, 3); }
 function directionText(paper, separator = " · ") { return directionsFor(paper).join(separator); }
-function affiliationText(paper) { return (paper.affiliations || "").split("\n").map(escapeXml).join("<br />"); }
+function styleSlug(text) { return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+function directionBadges(paper) { return directionsFor(paper).map((direction, index) => `${index ? `<span class="direction-separator">·</span>` : ""}<span class="direction-badge direction-${styleSlug(direction)}">${escapeXml(direction)}</span>`).join(""); }
+function venueLabel(paper) { return `${escapeXml(paper.venue)}${paper.presentation ? ` · ${escapeXml(paper.presentation)}` : ""}`; }
+function yearLabel(paper) { return escapeXml(paper.year); }
+function publicationMetaLabel(paper) { return `${venueLabel(paper)} · ${yearLabel(paper)}`; }
+function venueClass(paper) {
+  const venue = (paper.venue || "").toLowerCase();
+  if (venue.includes("findings")) return "findings";
+  if (venue.includes("cvpr")) return "cvpr";
+  if (venue.includes("tacl")) return "tacl";
+  return "standard";
+}
+function affiliationText(paper) { return (paper.affiliations || "").split("\n").map((affiliation) => `<span class="affiliation-item">${escapeXml(affiliation)}</span>`).join(""); }
 function pdfUrl(paper) {
   if (paper.pdf) return paper.pdf;
   if (paper.arxiv?.includes("arxiv.org/abs/")) return paper.arxiv.replace("/abs/", "/pdf/");
@@ -134,7 +186,7 @@ function header() {
 
 function card(paper, index) {
   const pdf = pdfUrl(paper);
-  return `<article class="paper-card"><div class="cover-stage"><button class="cover-button" data-open="${paper.id}" aria-label="Open details for ${escapeXml(paper.title)}"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${String(index + 1).padStart(2, "0")}</span><span class="cover-overlay"><strong>${escapeXml(paper.title)}</strong></span></div></button>${pdf ? `<a class="edit-cover pdf-link" href="${pdf}" target="_blank" rel="noreferrer" aria-label="Open PDF for ${escapeXml(paper.title)}">${icon("external", 15)}</a>` : ""}</div><div class="paper-card-info"><h2 class="paper-card-title">${escapeXml(paper.title)}</h2><div class="paper-card-meta"><span>${[paper.venue, paper.year].filter(Boolean).join(" · ")}</span><span class="tag">${directionText(paper)}</span></div></div></article>`;
+  return `<article class="paper-card venue-${venueClass(paper)}"><div class="cover-stage"><button class="cover-button" data-open="${paper.id}" aria-label="Open details for ${escapeXml(paper.title)}"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /><span class="paper-index">${String(index + 1).padStart(2, "0")}</span><span class="cover-overlay"><strong>${escapeXml(paper.title)}</strong></span></div></button>${pdf ? `<a class="edit-cover pdf-link" href="${pdf}" target="_blank" rel="noreferrer" aria-label="Open PDF for ${escapeXml(paper.title)}">${icon("external", 15)}</a>` : ""}</div><div class="paper-card-info"><div class="paper-card-meta"><span class="paper-publication"><span class="paper-venue">${venueLabel(paper)}</span><span class="paper-year">${yearLabel(paper)}</span></span><span class="direction-list">${directionBadges(paper)}</span></div></div></article>`;
 }
 
 function home() {
@@ -149,7 +201,7 @@ function home() {
 
 function detail(paper) {
   if (!paper) return `${header()}<main class="main not-found"><p class="eyebrow">404 / not in gallery</p><h1>This paper is not in the gallery.</h1><a class="back-link" href="#/">${icon("back")} Back to Paper Gallery</a></main>`;
-  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} Return</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${paper.venue} · ${paper.year}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p>${paper.affiliations ? `<p class="detail-affiliations">${affiliationText(paper)}${paper.authorNote ? `<br /><span>${escapeXml(paper.authorNote)}</span>` : ""}</p>` : ""}<p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${directionText(paper)}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.memory || "")}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row">${paperPageUrl(paper) ? `<a class="external-link" href="${paperPageUrl(paper)}" target="_blank" rel="noreferrer">${paperPageLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">${publicationLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
+  return `${header()}<main class="main"><a class="back-link" href="#/">${icon("back")} Return</a><div class="detail-layout"><aside class="detail-cover"><div class="cover-frame"><img class="cover-image" src="${getCover(paper)}" alt="Cover of ${escapeXml(paper.title)}" /></div><button class="external-link secondary" style="margin-top:12px;width:100%;justify-content:center" data-upload="${paper.id}">${icon("edit", 15)} 更换我的封面</button><input class="sr-only" type="file" accept="image/*" data-file-input="${paper.id}" /></aside><article class="detail-content"><p class="eyebrow">${publicationMetaLabel(paper)}</p><h1>${escapeXml(paper.title)}</h1><p class="detail-authors">${escapeXml(paper.authors)}</p>${paper.affiliations ? `<p class="detail-affiliations">${affiliationText(paper)}</p>` : ""}<p class="detail-rule"></p><p class="detail-abstract">${escapeXml(paper.abstract)}</p><div class="meta-grid"><div class="meta-box"><span>Direction</span><strong>${directionText(paper)}</strong></div><div class="meta-box"><span>${paper.published ? "Published" : "Year"}</span><strong>${escapeXml(paper.published || paper.year)}</strong></div><div class="meta-box"><span>Memory</span><strong>${escapeXml(paper.memory || "")}</strong></div></div><p class="eyebrow">read / inspect</p><div class="link-row">${paperPageUrl(paper) ? `<a class="external-link" href="${paperPageUrl(paper)}" target="_blank" rel="noreferrer">${paperPageLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.publication ? `<a class="external-link secondary" href="${paper.publication}" target="_blank" rel="noreferrer">${publicationLabel(paper)} ${icon("external", 15)}</a>` : ""}${paper.openReview ? `<a class="external-link secondary" href="${paper.openReview}" target="_blank" rel="noreferrer">OpenReview ${icon("external", 15)}</a>` : ""}${paper.github ? `<a class="external-link secondary" href="${paper.github}" target="_blank" rel="noreferrer">GitHub ${icon("external", 15)}</a>` : ""}</div></article></div></main>`;
 }
 
 function render() {
