@@ -74,6 +74,25 @@ const MINIMAL_PAPERS = [
     coverImage: "./assets/covers/asd-figure-2.png"
   },
   {
+    id: "geometry-of-refusal",
+    title: "The Geometry of Refusal in Large Language Models: Concept Cones and Representational Independence",
+    authors: "Tom Wollschläger, Jannes Elstner, Simon Geisler, Vincent Cohen-Addad, Stephan Günnemann, Johannes Gasteiger",
+    affiliations: "",
+    year: "2025",
+    published: "February 2025",
+    venue: "arXiv",
+    directions: ["LLM", "Safety"],
+    memory: "",
+    abstract: "This work studies the geometry of refusal mechanisms in large language models. It identifies multiple independent refusal directions and multidimensional concept cones, and introduces representational independence to account for both linear and nonlinear intervention effects.",
+    arxiv: "https://arxiv.org/abs/2502.17420",
+    pdf: "https://arxiv.org/pdf/2502.17420",
+    paperPage: "https://arxiv.org/html/2502.17420",
+    publication: null,
+    github: null,
+    openReview: null,
+    coverImage: "./assets/covers/geometry-of-refusal-user.png"
+  },
+  {
     id: "safety-potential-pruning",
     title: "Safety-Potential Pruning for Enhancing Safety Prompts Against VLM Jailbreaking Without Retraining",
     authors: "Chongxin Li, Hanzhang Wang*, Lian Duan",
