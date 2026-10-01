@@ -79,8 +79,9 @@ const MINIMAL_PAPERS = [
     authors: "Tom Wollschläger, Jannes Elstner, Simon Geisler, Vincent Cohen-Addad, Stephan Günnemann, Johannes Gasteiger",
     affiliations: "",
     year: "2025",
-    published: "February 2025",
-    venue: "arXiv",
+    published: "2025",
+    venue: "ICML",
+    presentation: "Poster",
     directions: ["LLM", "Safety"],
     memory: "",
     abstract: "This work studies the geometry of refusal mechanisms in large language models. It identifies multiple independent refusal directions and multidimensional concept cones, and introduces representational independence to account for both linear and nonlinear intervention effects.",
@@ -293,7 +294,7 @@ function directionMarkup(paper) {
 }
 
 function navigation() {
-  return `<nav class="site-nav"><div class="nav-inner"><a class="wordmark" href="#/" aria-label="Paper Gallery home"><span class="wordmark-dot"></span><span>Paper Gallery</span></a><div class="nav-actions"><span class="nav-count">${MINIMAL_PAPERS.length} papers</span><a class="nav-link" href="./index.html">${icon("back", 13)} <span>Original design</span></a></div></div></nav>`;
+  return `<nav class="site-nav"><div class="nav-inner"><a class="wordmark" href="#/" aria-label="Paper Gallery home"><span class="wordmark-dot"></span><span>Paper Gallery</span></a><div class="nav-actions"><span class="nav-count">${MINIMAL_PAPERS.length} papers</span><a class="nav-link" href="./original.html">${icon("back", 13)} <span>Original design</span></a></div></div></nav>`;
 }
 
 function paperCard(paper, index) {
